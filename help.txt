@@ -1,0 +1,7 @@
+My GitHub link  is https://github.com/VV-cephei/Lit-Bot
+Here are a list of commands:
+
+!quote:
+			-name		Search by the first name of the person you are trying to quote from the archive. Takes a string parameter.
+			-id			Select a post from a specific psot #. Takes a integer parameter.
+			-context	See the previous 5 posts and future 5 posts. Takes no parameters.

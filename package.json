@@ -6,6 +6,8 @@
   "author": "YOUR-NAME-HERE",
   "dependencies": {
     "discord.io": "github:woor/discord.io#gateway_v6",
+    "minimist": "^1.2.0",
+    "minimist-string": "^1.0.2",
     "winston": "^3.1.0"
   }
 }

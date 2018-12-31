@@ -4,7 +4,7 @@ var minimist = require('minimist-string');
 function quote(command) {
 	var argv = minimist(command);
 	var data = fs.readFileSync('Full Text - Timestamps - Neutral Names.txt', "utf16le")
-	var data = fs.readFileSync('Full Text - Timestamps - Neutral Names.txt', "utf16le")
+	//var data = fs.readFileSync('Full Text - Timestamps - Neutral Names.txt', "utf16le")
 	console.log('in quote command');
 	var quoteName = (argv.name === undefined) ? "" : argv.name;
 	var regexString = "\\n(?=" + quoteName + "\\w*\\s{0,2}\\w*:)";
@@ -18,7 +18,7 @@ function quote(command) {
 	regexString = "\\n(?=\\w*\\s{0,2}\\w*:)";
 	re = new RegExp(regexString,'gi');
 
-	if (argv.context != undefined) {
+	if (argv.context !== undefined) {
 		var message = '';
 		for (var i = -5; i <= 5; i++) {
 			try {

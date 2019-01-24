@@ -2,15 +2,18 @@
   "name": "Lit-Bot",
   "version": "1.0.0",
   "description": "My own Discord bot",
-  "main": "bot.js",
+  "main": "./src/bot.js",
   "author": "YOUR-NAME-HERE",
   "scripts": {
     "test": "jest"
   },
   "dependencies": {
     "discord.io": "github:woor/discord.io#gateway_v6",
+    "discord.js": "^11.4.2",
+    "discord.js-commando": "^0.10.0",
     "minimist": "^1.2.0",
     "minimist-string": "^1.0.2",
+    "request": "^2.88.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {

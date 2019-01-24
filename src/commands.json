@@ -1,0 +1,25 @@
+[{
+    "name": "quote",
+    "triggers": ["q", "!q", "quote", "!quote"],
+    "channels": ["the-pink-fields"],
+    "path": "./quote.js"
+  },
+  {
+    "name": "4chan",
+    "triggers": ["4", "4chan", "!4chan"],
+    "channels": ["the-pink-fields"],
+    "path": "./4chan.js"
+  },
+  {
+    "name": "help",
+    "triggers": ["h", "help", "!help"],
+    "channels": [],
+    "path": "./help.js"
+  },
+  {
+    "name": "commands",
+    "triggers": ["c", "commands", "!commands"],
+    "channels": [],
+    "path": "./commands.js"
+  }
+]

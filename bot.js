@@ -1,25 +1,51 @@
-var Discord = require('discord.io');
-var minimist = require('minimist-string');
+const fs = require('fs')
+const Discord = require('discord.js');
+const minimist = require('minimist-string');
 const auth = require('./auth.json');
-var quote = require('./quote.js');
 
-var bot = new Discord.Client({
-    autorun: true,
-    token: auth.token
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+fs.readdir("./events/", (err, files) => {
+  if (err) return console.error(err);
+
+  files.forEach(file => {
+    const event = require(`./events/${file}`);
+    let eventName = file.split(".")[0];
+    console.log(`Adding event ${eventName}`)
+    client.on(eventName, event.bind(null, client));
+  });
 });
 
-bot.on('ready', function(event) {
-    console.log('Logged in as %s - %s\n', bot.username, bot.id);
+fs.readdir("./cmds/", (err, files) => {
+  if (err) return console.error(err);
+
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return;
+    let props = require(`./cmds/${file}`);
+    let commandName = file.split(".")[0];
+    console.log(`Attempting to load command ${commandName}`);
+    client.commands.set(commandName, props);
+  });
 });
 
-bot.on('message', function(user, userID, channelID, message, event) {
-	console.log('message recieved');
-	parseMessage = minimist(message.toLowerCase());
-	if ('!quote'.includes(parseMessage._[0])) {
-		var discordMessage = quote(message);
-		bot.sendMessage({
-        	to: channelID,
-        	message: discordMessage
-    	});
-	}
-});
+
+// client.on('ready', () => {
+//   console.log(`Logged in as ${client.user.username}!`)
+//   client.user.setActivity("with my books")
+// });
+
+// client.on('message', msg => {
+//   if (message.author.bot) return;
+//   commands.filter(command => {
+//     command.triggers.filter(trigger => {
+//       if (minimist(msg.content.toLowerCase())._[0] == trigger && command.channels.indexOf(msg.channel.name) > -1) {
+//         console.log('COMMAND YOU')
+//         var subCommand = require(command.path)
+//         msg.channel.send(subCommand(msg.content))
+//       }
+//     })
+//   })
+// });
+
+client.login(auth.token);

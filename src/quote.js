@@ -3,7 +3,7 @@ var minimist = require('minimist-string');
 
 function quote(command) {
 	var argv = minimist(command);
-	var data = fs.readFileSync('Full Text - Timestamps - Neutral Names.txt', "utf16le")
+	var data = fs.readFileSync('/var/Lit-Bot/Full Text - Timestamps - Neutral Names.txt', "utf16le")
 	//var data = fs.readFileSync('Full Text - Timestamps - Neutral Names.txt', "utf16le")
 	console.log('in quote command');
 	var quoteName = (argv.name === undefined) ? "" : argv.name;

@@ -1,12 +1,16 @@
 const minimist = require('minimist-string');
-const commands = require('../commands.json')
+const commands = require('../commands.json');
+const fs = require('fs');
 
 module.exports = (client, msg) => {
   // Ignore all bots
+  var curses = JSON.parse(fs.readFileSync('/var/Lit-Bot/curses.json'));
   let command
   let cmd
+  let crs
   if (msg.author.bot) return;
   console.log('message received!')
+  console.log(msg.author.id)
   // Ignore messages not starting with the prefix (in config.json)
   //if (message.content.indexOf(client.config.prefix) !== 0) return;
 
@@ -28,8 +32,19 @@ module.exports = (client, msg) => {
   })
 
   // Grab the command data from the client.commands Enmap
-  
-  console.log(cmd)
+ 
+  curses.filter(curse => {
+    curse.cursed.filter(cursee => {
+      if (cursee.name == '<@' + msg.author.id + '>') {
+        console.log(msg.author.id + ' is cursed with ' + curse.name);
+        crs = client.curses.get(curse.name);
+        if (!crs) return;
+
+        crs.run(client, msg);
+      }
+    })
+  })
+ 
 
   // If that command doesn't exist, silently exit and do nothing
   

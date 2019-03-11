@@ -9,6 +9,11 @@
     "channels": ["the-pink-fields", "general"]
   },
   {
+    "name": "curse",
+    "triggers": ["curse","!curse"],
+    "channels": ["the-pink-fields", "general"]
+  },
+  {
     "name": "help",
     "triggers": ["h", "help", "!help"],
     "channels": []

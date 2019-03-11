@@ -5,6 +5,7 @@ const auth = require('./auth.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.curses = new Discord.Collection();
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
@@ -29,6 +30,17 @@ fs.readdir("./cmds/", (err, files) => {
   });
 });
 
+fs.readdir("./curses/", (err, files) => {
+  if (err) return console.error(err);
+
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return;
+    let props = require(`./curses/${file}`);
+    let curseName = file.split(".")[0];
+    console.log(`Attempting to load curse ${curseName}`);
+    client.curses.set(curseName, props);
+  });
+})
 
 // client.on('ready', () => {
 //   console.log(`Logged in as ${client.user.username}!`)
